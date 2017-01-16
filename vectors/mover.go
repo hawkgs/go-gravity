@@ -9,3 +9,8 @@ type Mover struct {
 	velocity     vector.GVector
 	location     vector.GVector
 }
+
+// ApplyForce ...
+func (m *Mover) ApplyForce(force *vector.Vector) {
+	// todo
+}
