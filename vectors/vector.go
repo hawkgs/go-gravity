@@ -2,7 +2,17 @@ package vector
 
 import "math"
 
-// Vector describes a basic Eucleadean vector.
+// GVector represents a geometric/Eucleadean vector
+type GVector interface {
+	Add()
+	Subtract()
+	Multiply()
+	Mangnitude()
+	Normalize()
+	Copy()
+}
+
+// Vector implements a GVector
 type Vector struct {
 	x float64
 	y float64
