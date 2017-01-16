@@ -37,3 +37,8 @@ func (v *Vector) Magnitude() float64 {
 func (v *Vector) Normalize() {
 	// todo
 }
+
+// Copy creates a copy of the vector
+func (v *Vector) Copy() *Vector {
+	return NewVector(v.x, v.y)
+}
