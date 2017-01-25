@@ -1,6 +1,10 @@
 package vector
 
-import vector "github.com/hAWKdv/go-gravity/vectors"
+import (
+	"math"
+
+	vector "github.com/hAWKdv/go-gravity/vectors"
+)
 
 // Mover describes a basic moveable object/particle
 type Mover struct {
@@ -40,4 +44,16 @@ func (m *Mover) ApplyForce(force *vector.Vector) {
 // Update ...
 func (m *Mover) Update() {
 	// todo
+}
+
+// PixelLoc returns the rounded values of vector's X and Y
+func (m *Mover) PixelLoc() (int, int) {
+	return round(m.location.x), round(m.location.y)
+}
+
+func round(n float64) int {
+	if n < 0 {
+		return math.Ceil(n - 0.5)
+	}
+	return math.Floor(n + 0.5)
 }
