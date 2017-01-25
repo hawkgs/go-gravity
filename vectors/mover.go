@@ -1,22 +1,18 @@
 package vector
 
-import (
-	"math"
-
-	vector "github.com/hAWKdv/go-gravity/vectors"
-)
+import "math"
 
 // Mover describes a basic moveable object/particle
 type Mover struct {
 	obj          interface{}
-	acceleration *vector.GVector
-	velocity     *vector.GVector
-	location     *vector.GVector
+	acceleration *Vector
+	velocity     *Vector
+	location     *Vector
 	mass         float64
 }
 
 // NewMover creates an object of type Mover (constructor)
-func NewMover(obj interface{}, location *vector.GVector) *Mover {
+func NewMover(obj interface{}, location *Vector) *Mover {
 	var mover *Mover
 
 	if obj != nil {
@@ -27,6 +23,7 @@ func NewMover(obj interface{}, location *vector.GVector) *Mover {
 
 	mover.acceleration = NewVector(0, 0)
 	mover.velocity = NewVector(0, 0)
+	mover.mass = 0
 
 	if location != nil {
 		mover.location = location
@@ -43,12 +40,12 @@ func (m *Mover) SetMass(mass float64) {
 }
 
 // ApplyForce adds the force vector the object's acceleration vector
-func (m *Mover) ApplyForce(force *vector.Vector) {
+func (m *Mover) ApplyForce(force *Vector) {
 	// Newton's 2nd law: Acceleration = Sum of all forces / Mass
 	fCopy := force.Copy()
 	// Apply the full law only if the mass has been set
-	if mass > 0 {
-		fCopy.Divide(mass)
+	if m.mass > 0 {
+		fCopy.Divide(m.mass)
 	}
 	m.acceleration.Add(fCopy)
 }
@@ -69,8 +66,11 @@ func (m *Mover) PixelLoc() (int, int) {
 }
 
 func round(n float64) int {
+	var num float64
 	if n < 0 {
-		return math.Ceil(n - 0.5)
+		num = math.Ceil(n - 0.5)
 	}
-	return math.Floor(n + 0.5)
+	num = math.Floor(n + 0.5)
+
+	return int(num)
 }
