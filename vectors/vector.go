@@ -52,6 +52,10 @@ func (v *Vector) Magnitude() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y)
 }
 
+func (v *Vector) Limit() {
+
+}
+
 // Normalize sets the magnitude to 1
 func (v *Vector) Normalize() {
 	mag := v.Magnitude()
