@@ -88,7 +88,19 @@ func (v *Vector) Normalize() {
 	}
 }
 
+// PixelLoc returns the rounded values of vector's X and Y
+func (v *Vector) PixelLoc() (int, int) {
+	return round(v.x), round(v.y)
+}
+
 // Copy creates a copy of the vector
 func (v *Vector) Copy() *Vector {
 	return NewVector(v.x, v.y)
+}
+
+func round(n float64) int {
+	if n < 0 {
+		return math.Ceil(n - 0.5)
+	}
+	return math.Floor(n + 0.5)
 }
