@@ -1,2 +1,3 @@
 # go-gravity
-Simple Golang 2D physics library with built in particle system. Rendering - SDL2
+Small Golang library for simulating 2D particles with the help of SDL2.
+

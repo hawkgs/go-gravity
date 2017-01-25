@@ -19,7 +19,7 @@ type Vector struct {
 }
 
 // NewVector creates a new object of type Vector (basically constructor)
-func NewVector(x float64, y float64) *Vector {
+func NewVector(x, y float64) *Vector {
 	return &Vector{x, y}
 }
 
