@@ -52,8 +52,31 @@ func (v *Vector) Magnitude() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y)
 }
 
-func (v *Vector) Limit() {
+// Limit vector's magnitude by a provided value
+func (v *Vector) Limit(mag float64) {
+	curr := v.Magnitude()
 
+	if curr > mag && mag > 0 {
+		ratio := curr / mag
+		v.Divide(ratio)
+	}
+}
+
+// Heading returns the heading of the vector in degrees
+func (v *Vector) Heading() int {
+	angle := math.Atan2(v.y, v.x)
+
+	return RadToDeg(angle)
+}
+
+// Rotate vector by a degree angle
+func (v *Vector) Rotate(deg int) {
+	rads := DegToRad(deg)
+	cos := math.Cos(rads)
+	sin := math.Sin(rads)
+
+	v.x = v.x*cos - v.y*sin
+	v.y = v.x*sin + v.y*cos
 }
 
 // Normalize sets the magnitude to 1
