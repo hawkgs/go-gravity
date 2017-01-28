@@ -12,7 +12,7 @@ import (
 const (
 	WindowTitle  = "go-gravity"
 	WindowWidth  = 800
-	WindowHeight = 800
+	WindowHeight = 700
 	FrameRate    = 60
 )
 
@@ -64,12 +64,12 @@ func Render() int {
 	renderer.Clear()
 
 	// Create rect
-	initLoc := vector.NewVector(WindowWidth/2, 100)
+	initLoc := vector.NewVector(100, 100)
 	rect := sdl.Rect{X: int32(initLoc.X), Y: int32(initLoc.Y), W: 10, H: 10}
-	mover := vector.NewMover(&rect, initLoc)
+	mover := vector.NewMover(&rect, initLoc, vector.NewVector(WindowWidth, WindowHeight))
 	// mover.SetLimit(0.2)
 	gravity := vector.NewVector(0, 0.08)
-	wind := vector.NewVector(0.1, 0)
+	wind := vector.NewVector(0.01, 0)
 
 	// Main loop
 	running := true
@@ -86,17 +86,15 @@ func Render() int {
 		renderer.FillRect(&sdl.Rect{X: 0, Y: 0, W: WindowWidth, H: WindowHeight})
 
 		// Update
-		if wind.X > 0 {
-			wind.X -= 0.005
-		} else {
-			wind.X = 0
-		}
 		mover.ApplyForce(gravity)
 		mover.ApplyForce(wind)
 		mover.Update()
+
 		x, y := mover.PixelLoc()
 		rect.X = int32(x)
 		rect.Y = int32(y)
+
+		mover.BounceOff()
 
 		// rect.X = rect.X + 1
 		// rect.Y = rect.Y + 1

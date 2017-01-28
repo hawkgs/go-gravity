@@ -8,12 +8,13 @@ type Mover struct {
 	acceleration *Vector
 	velocity     *Vector
 	location     *Vector
+	container    *Vector
 	mass         float64
 	limit        float64
 }
 
 // NewMover creates an object of type Mover (constructor)
-func NewMover(obj interface{}, location *Vector) *Mover {
+func NewMover(obj interface{}, location *Vector, container *Vector) *Mover {
 	var mover *Mover
 
 	if obj != nil {
@@ -31,6 +32,10 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 		mover.location = location
 	} else {
 		mover.location = NewVector(0, 0)
+	}
+
+	if container != nil {
+		mover.container = container
 	}
 
 	return mover
@@ -76,4 +81,24 @@ func (m *Mover) Update() {
 // PixelLoc returns the rounded values of location's X and Y which are ready for rendering
 func (m *Mover) PixelLoc() (int, int) {
 	return util.Round(m.location.X), util.Round(m.location.Y)
+}
+
+// BounceOff keeps the mover within its container (bounces off) when it reaches an edge
+func (m *Mover) BounceOff() {
+	if m.container == nil {
+		return
+	}
+
+	if m.location.X > m.container.X {
+		m.location.X = m.container.X
+		m.velocity.X *= -1
+	} else if m.location.X < 0 {
+		m.velocity.X *= -1
+		m.location.X = 0
+	}
+
+	if m.location.Y > m.container.Y {
+		m.velocity.Y *= -1
+		m.location.Y = m.container.Y
+	}
 }
