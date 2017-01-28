@@ -67,8 +67,9 @@ func Render() int {
 	initLoc := vector.NewVector(WindowWidth/2, 100)
 	rect := sdl.Rect{X: int32(initLoc.X), Y: int32(initLoc.Y), W: 10, H: 10}
 	mover := vector.NewMover(&rect, nil)
+	mover.SetLimit(0.3)
 	gravity := vector.NewVector(0, 0.01)
-	wind := vector.NewVector(0.004, 0)
+	// wind := vector.NewVector(0.004, 0)
 
 	// Main loop
 	running := true
@@ -86,7 +87,7 @@ func Render() int {
 
 		// Update
 		mover.ApplyForce(gravity)
-		mover.ApplyForce(wind)
+		// mover.ApplyForce(wind)
 		mover.Update()
 		x, y := mover.PixelLoc()
 		rect.X += int32(x)

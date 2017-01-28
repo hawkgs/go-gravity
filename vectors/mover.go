@@ -9,6 +9,7 @@ type Mover struct {
 	velocity     *Vector
 	location     *Vector
 	mass         float64
+	limit        float64
 }
 
 // NewMover creates an object of type Mover (constructor)
@@ -24,6 +25,7 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 	mover.acceleration = NewVector(0, 0)
 	mover.velocity = NewVector(0, 0)
 	mover.mass = 0
+	mover.limit = 0
 
 	if location != nil {
 		mover.location = location
@@ -37,6 +39,11 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 // SetMass assigns the mass argument to the object's mass
 func (m *Mover) SetMass(mass float64) {
 	m.mass = mass
+}
+
+// SetLimit puts a velocity limit when accelerating
+func (m *Mover) SetLimit(limit float64) {
+	m.limit = limit
 }
 
 // ApplyForce adds the force vector the object's acceleration vector
@@ -55,6 +62,12 @@ func (m *Mover) ApplyForce(force *Vector) {
 func (m *Mover) Update() {
 	// We keep the velocity only for correctness based on physics laws
 	m.velocity.Add(m.acceleration)
+
+	// Apply velocity limit, if there is any.
+	if m.limit > 0 {
+		m.velocity.Limit(m.limit)
+	}
+
 	m.location.Add(m.velocity)
 	// Clear the acceleration
 	m.acceleration.Multiply(0)
