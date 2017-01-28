@@ -64,6 +64,10 @@ func Render() int {
 
 	// Create rect
 	rect := sdl.Rect{X: 0, Y: 0, W: 10, H: 10}
+	// initLoc := vector.NewVector(WindowWidth/2, 100)
+	// mover := vector.NewMover(&rect, initLoc)
+	// gravity := vector.NewVector(0, 0.01)
+	// wind := vector.NewVector(0.004, 0)
 
 	// Main loop
 	running := true
@@ -80,6 +84,13 @@ func Render() int {
 		renderer.FillRect(&sdl.Rect{X: 0, Y: 0, W: WindowWidth, H: WindowHeight})
 
 		// Update
+		// mover.ApplyForce(gravity)
+		// mover.ApplyForce(wind)
+		// mover.Update()
+		// x, y := mover.PixelLoc()
+		// rect.X += int32(x)
+		// rect.Y += int32(y)
+
 		rect.X = rect.X + 1
 		rect.Y = rect.Y + 1
 		renderer.SetDrawColor(0, 0, 0, 255)

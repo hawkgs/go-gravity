@@ -1,10 +1,10 @@
 package vector
 
-import "math"
+import util "github.com/hAWKdv/go-gravity/vectors/utils"
 
 // Mover describes a basic moveable object/particle
 type Mover struct {
-	obj          interface{}
+	Obj          interface{}
 	acceleration *Vector
 	velocity     *Vector
 	location     *Vector
@@ -16,7 +16,7 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 	var mover *Mover
 
 	if obj != nil {
-		mover = &Mover{obj: obj}
+		mover = &Mover{Obj: obj}
 	} else {
 		mover = &Mover{}
 	}
@@ -62,15 +62,5 @@ func (m *Mover) Update() {
 
 // PixelLoc returns the rounded values of location's X and Y which are ready for rendering
 func (m *Mover) PixelLoc() (int, int) {
-	return round(m.location.x), round(m.location.y)
-}
-
-func round(n float64) int {
-	var num float64
-	if n < 0 {
-		num = math.Ceil(n - 0.5)
-	}
-	num = math.Floor(n + 0.5)
-
-	return int(num)
+	return util.Round(m.location.X), util.Round(m.location.Y)
 }

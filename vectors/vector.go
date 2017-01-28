@@ -18,8 +18,8 @@ type GVector interface {
 
 // Vector implements a GVector
 type Vector struct {
-	x float64
-	y float64
+	X float64
+	Y float64
 }
 
 // NewVector creates a new object of type Vector (basically constructor)
@@ -29,31 +29,31 @@ func NewVector(x, y float64) *Vector {
 
 // Add performs addition of the current and provided as an argument vectors
 func (v *Vector) Add(u *Vector) {
-	v.x += u.x
-	v.y += u.y
+	v.X += u.X
+	v.Y += u.Y
 }
 
 // Subtract performs subtraction of the current and provided as an argument vectors
 func (v *Vector) Subtract(u *Vector) {
-	v.x -= u.x
-	v.y -= u.y
+	v.X -= u.X
+	v.Y -= u.Y
 }
 
 // Multiply performs multiplication of the current vector by N
 func (v *Vector) Multiply(n float64) {
-	v.x *= n
-	v.y *= n
+	v.X *= n
+	v.Y *= n
 }
 
 // Divide performs division of the current vector by N
 func (v *Vector) Divide(n float64) {
-	v.x /= n
-	v.y /= n
+	v.X /= n
+	v.Y /= n
 }
 
 // Magnitude returns the magnitude of the vector
 func (v *Vector) Magnitude() float64 {
-	return math.Sqrt(v.x*v.x + v.y*v.y)
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
 // Limit vector's magnitude by a provided value
@@ -68,7 +68,7 @@ func (v *Vector) Limit(mag float64) {
 
 // Heading returns the heading of the vector in degrees
 func (v *Vector) Heading() int {
-	angle := math.Atan2(v.y, v.x)
+	angle := math.Atan2(v.Y, v.X)
 
 	return util.RadToDeg(angle)
 }
@@ -79,8 +79,8 @@ func (v *Vector) Rotate(deg int) {
 	cos := math.Cos(rads)
 	sin := math.Sin(rads)
 
-	v.x = v.x*cos - v.y*sin
-	v.y = v.x*sin + v.y*cos
+	v.X = v.X*cos - v.Y*sin
+	v.Y = v.X*sin + v.Y*cos
 }
 
 // Normalize sets the magnitude to 1
@@ -94,5 +94,5 @@ func (v *Vector) Normalize() {
 
 // Copy creates a copy of the vector
 func (v *Vector) Copy() *Vector {
-	return NewVector(v.x, v.y)
+	return NewVector(v.X, v.Y)
 }
