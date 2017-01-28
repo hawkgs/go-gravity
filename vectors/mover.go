@@ -27,15 +27,12 @@ func NewMover(obj interface{}, location *Vector, container *Vector) *Mover {
 	mover.velocity = NewVector(0, 0)
 	mover.mass = 1
 	mover.limit = 0
+	mover.container = container
 
 	if location != nil {
 		mover.location = location
 	} else {
 		mover.location = NewVector(0, 0)
-	}
-
-	if container != nil {
-		mover.container = container
 	}
 
 	return mover
