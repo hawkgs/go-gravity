@@ -24,7 +24,7 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 
 	mover.acceleration = NewVector(0, 0)
 	mover.velocity = NewVector(0, 0)
-	mover.mass = 0
+	mover.mass = 1
 	mover.limit = 0
 
 	if location != nil {
@@ -38,6 +38,9 @@ func NewMover(obj interface{}, location *Vector) *Mover {
 
 // SetMass assigns the mass argument to the object's mass
 func (m *Mover) SetMass(mass float64) {
+	if mass < 1 {
+		return
+	}
 	m.mass = mass
 }
 
@@ -50,10 +53,7 @@ func (m *Mover) SetLimit(limit float64) {
 func (m *Mover) ApplyForce(force *Vector) {
 	// Newton's 2nd law: Acceleration = Sum of all forces / Mass
 	fCopy := force.Copy()
-	// Apply the full law only if the mass has been set
-	if m.mass > 0 {
-		fCopy.Divide(m.mass)
-	}
+	fCopy.Divide(m.mass)
 	m.acceleration.Add(fCopy)
 }
 
