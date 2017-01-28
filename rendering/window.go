@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	vector "github.com/hAWKdv/go-gravity/vectors"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -11,8 +12,8 @@ import (
 const (
 	WindowTitle  = "go-gravity"
 	WindowWidth  = 800
-	WindowHeight = 600
-	FrameRate    = 60
+	WindowHeight = 800
+	FrameRate    = 30
 )
 
 func createSdlWindow() (*sdl.Window, int) {
@@ -63,11 +64,11 @@ func Render() int {
 	renderer.Clear()
 
 	// Create rect
-	rect := sdl.Rect{X: 0, Y: 0, W: 10, H: 10}
-	// initLoc := vector.NewVector(WindowWidth/2, 100)
-	// mover := vector.NewMover(&rect, initLoc)
-	// gravity := vector.NewVector(0, 0.01)
-	// wind := vector.NewVector(0.004, 0)
+	initLoc := vector.NewVector(WindowWidth/2, 100)
+	rect := sdl.Rect{X: int32(initLoc.X), Y: int32(initLoc.Y), W: 10, H: 10}
+	mover := vector.NewMover(&rect, nil)
+	gravity := vector.NewVector(0, 0.01)
+	wind := vector.NewVector(0.004, 0)
 
 	// Main loop
 	running := true
@@ -84,15 +85,15 @@ func Render() int {
 		renderer.FillRect(&sdl.Rect{X: 0, Y: 0, W: WindowWidth, H: WindowHeight})
 
 		// Update
-		// mover.ApplyForce(gravity)
-		// mover.ApplyForce(wind)
-		// mover.Update()
-		// x, y := mover.PixelLoc()
-		// rect.X += int32(x)
-		// rect.Y += int32(y)
+		mover.ApplyForce(gravity)
+		mover.ApplyForce(wind)
+		mover.Update()
+		x, y := mover.PixelLoc()
+		rect.X += int32(x)
+		rect.Y += int32(y)
 
-		rect.X = rect.X + 1
-		rect.Y = rect.Y + 1
+		// rect.X = rect.X + 1
+		// rect.Y = rect.Y + 1
 		renderer.SetDrawColor(0, 0, 0, 255)
 		renderer.DrawRect(&rect)
 
