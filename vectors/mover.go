@@ -4,13 +4,16 @@ import util "github.com/hAWKdv/go-gravity/vectors/utils"
 
 // Mover describes a basic moveable object/particle
 type Mover struct {
-	Obj          interface{}
-	acceleration *Vector
-	velocity     *Vector
-	location     *Vector
-	container    *Vector
-	mass         float64
-	limit        float64
+	Obj           interface{}
+	acceleration  *Vector
+	velocity      *Vector
+	location      *Vector
+	container     *Vector
+	mass          float64
+	limit         float64
+	aAcceleration float64
+	aVelocity     float64
+	angle         float64
 }
 
 // NewMover creates an object of type Mover (constructor)
