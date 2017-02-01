@@ -73,8 +73,6 @@ func Render() int {
 	// mover.SetLimit(0.2)
 
 	// Create some forces
-	// gravity := vectors.NewVector(0, 0.08)
-	// wind := vectors.NewVector(0.01, 0)
 	gravity := forces.CreateGravity()
 	wind := forces.CreateWind()
 
