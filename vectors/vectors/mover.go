@@ -54,6 +54,11 @@ func (m *Mover) SetLimit(limit float64) {
 	m.limit = limit
 }
 
+// GetVelocity return the current velocity vector of the Mover
+func (m *Mover) GetVelocity() *Vector {
+	return m.velocity
+}
+
 // ApplyForce adds the force vector the object's acceleration vector
 func (m *Mover) ApplyForce(force *Vector) {
 	// Newton's 2nd law: Acceleration = Sum of all forces / Mass

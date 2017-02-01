@@ -75,6 +75,7 @@ func Render() int {
 	// Create some forces
 	gravity := forces.CreateGravity()
 	wind := forces.CreateWind()
+	friction := forces.CreateKineticFriction(mover)
 
 	// Main loop
 	running := true
@@ -93,6 +94,7 @@ func Render() int {
 		// Update
 		mover.ApplyForce(gravity.GetForce())
 		mover.ApplyForce(wind.GetForce())
+		mover.ApplyForce(friction.GetForce())
 		mover.UpdateSdl2()
 		mover.BounceOff()
 
