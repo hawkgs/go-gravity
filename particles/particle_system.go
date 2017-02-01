@@ -1,8 +1,8 @@
 package particles
 
-import vector "github.com/hAWKdv/go-gravity/vectors"
+import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
 // ParticleSystem ...
 type ParticleSystem struct {
-	particles []vector.GVector
+	particles []vectors.GVector
 }

@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	vector "github.com/hAWKdv/go-gravity/vectors"
+	"github.com/hAWKdv/go-gravity/vectors/forces"
+	"github.com/hAWKdv/go-gravity/vectors/vectors"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -65,10 +66,17 @@ func Render() int {
 
 	// Create rect
 	rect := sdl.Rect{X: 100, Y: 100, W: 10, H: 10}
-	mover := vector.NewMover(&rect, vector.NewVector(float64(rect.X), float64(rect.Y)), vector.NewVector(WindowWidth, WindowHeight))
+	mover := vectors.NewMover(
+		&rect,
+		vectors.NewVector(float64(rect.X), float64(rect.Y)),
+		vectors.NewVector(WindowWidth, WindowHeight))
 	// mover.SetLimit(0.2)
-	gravity := vector.NewVector(0, 0.08)
-	wind := vector.NewVector(0.01, 0)
+
+	// Create some forces
+	gravity := vectors.NewVector(0, 0.08)
+	wind := vectors.NewVector(0.01, 0)
+	gravi := forces.CreateWind(0.01)
+	fmt.Println(gravi)
 
 	// Main loop
 	running := true
@@ -90,8 +98,6 @@ func Render() int {
 		mover.UpdateSdl2()
 		mover.BounceOff()
 
-		// rect.X = rect.X + 1
-		// rect.Y = rect.Y + 1
 		renderer.SetDrawColor(0, 0, 0, 255)
 		renderer.DrawRect(&rect)
 

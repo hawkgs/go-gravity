@@ -1,9 +1,9 @@
-package vector
+package forces
 
-import vector "github.com/hAWKdv/go-gravity/vectors"
+import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
 // CreateWind creates a wind with
-func CreateWind(force float64) *vector.Vector {
+func CreateWind(force float64) *vectors.Vector {
 	// todo
-	return vector.NewVector(0.5*force, 0)
+	return vectors.NewVector(0.5*force, 0)
 }

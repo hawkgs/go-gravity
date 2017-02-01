@@ -1,9 +1,9 @@
-package vector
+package vectors
 
 import (
 	"math"
 
-	util "github.com/hAWKdv/go-gravity/vectors/utils"
+	"github.com/hAWKdv/go-gravity/vectors/utils"
 )
 
 // GVector represents a geometric/Eucleadean vector
@@ -70,12 +70,12 @@ func (v *Vector) Limit(mag float64) {
 func (v *Vector) Heading() int {
 	angle := math.Atan2(v.Y, v.X)
 
-	return util.RadToDeg(angle)
+	return utils.RadToDeg(angle)
 }
 
 // Rotate vector by a degree angle
 func (v *Vector) Rotate(deg int) {
-	rads := util.DegToRad(deg)
+	rads := utils.DegToRad(deg)
 	cos := math.Cos(rads)
 	sin := math.Sin(rads)
 

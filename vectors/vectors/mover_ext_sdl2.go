@@ -1,4 +1,4 @@
-package vector
+package vectors
 
 import "github.com/veandco/go-sdl2/sdl"
 

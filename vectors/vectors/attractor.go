@@ -1,4 +1,4 @@
-package vector
+package vectors
 
 // Attractor ...
 type Attractor struct {

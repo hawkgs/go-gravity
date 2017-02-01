@@ -1,9 +1,9 @@
-package vector
+package forces
 
-import vector "github.com/hAWKdv/go-gravity/vectors"
+import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
 // CreateGravity creates a gravity force
-func CreateGravity() *vector.Vector {
+func CreateGravity() *vectors.Vector {
 	// todo
-	return vector.NewVector(0, 0.3)
+	return vectors.NewVector(0, 0.3)
 }

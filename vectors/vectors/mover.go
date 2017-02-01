@@ -1,6 +1,6 @@
-package vector
+package vectors
 
-import util "github.com/hAWKdv/go-gravity/vectors/utils"
+import "github.com/hAWKdv/go-gravity/vectors/utils"
 
 // Mover describes a basic moveable object/particle
 type Mover struct {
@@ -80,7 +80,7 @@ func (m *Mover) Update() {
 
 // PixelLoc returns the rounded values of location's X and Y which are ready for rendering
 func (m *Mover) PixelLoc() (int, int) {
-	return util.Round(m.location.X), util.Round(m.location.Y)
+	return utils.Round(m.location.X), utils.Round(m.location.Y)
 }
 
 // BounceOff keeps the mover within its container (bounces off) when it reaches an edge
