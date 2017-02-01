@@ -2,12 +2,12 @@ package forces
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
-// VForce describes
+// VForce represents the methods of a vector force
 type VForce interface {
-	GetVector() vectors.Vector
+	GetVector() *vectors.Vector
 }
 
-// Force test
+// Force represents the properties of a vector force
 type Force struct {
 	vector *vectors.Vector
 }

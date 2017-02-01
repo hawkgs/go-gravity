@@ -73,10 +73,10 @@ func Render() int {
 	// mover.SetLimit(0.2)
 
 	// Create some forces
-	gravity := vectors.NewVector(0, 0.08)
-	wind := vectors.NewVector(0.01, 0)
-	gravi := forces.CreateWind(0.01)
-	fmt.Println(gravi)
+	// gravity := vectors.NewVector(0, 0.08)
+	// wind := vectors.NewVector(0.01, 0)
+	gravity := forces.CreateGravity()
+	wind := forces.CreateWind()
 
 	// Main loop
 	running := true
@@ -93,8 +93,8 @@ func Render() int {
 		renderer.FillRect(&sdl.Rect{X: 0, Y: 0, W: WindowWidth, H: WindowHeight})
 
 		// Update
-		mover.ApplyForce(gravity)
-		mover.ApplyForce(wind)
+		mover.ApplyForce(gravity.GetForce())
+		mover.ApplyForce(wind.GetForce())
 		mover.UpdateSdl2()
 		mover.BounceOff()
 

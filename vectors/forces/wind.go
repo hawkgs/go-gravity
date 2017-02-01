@@ -2,8 +2,18 @@ package forces
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
-// CreateWind creates a wind with
-func CreateWind(force float64) *vectors.Vector {
-	// todo
-	return vectors.NewVector(0.5*force, 0)
+// Wind force
+type Wind struct {
+	Force
+}
+
+// CreateWind creates a wind force
+func CreateWind() *Wind {
+	// todo values
+	return &Wind{Force{vectors.NewVector(0.01, 0)}}
+}
+
+// GetForce returns the force vector of gravity
+func (w *Wind) GetForce() *vectors.Vector {
+	return w.vector
 }
