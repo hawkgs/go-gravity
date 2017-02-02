@@ -2,6 +2,13 @@ package forces
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
+const (
+	// NormalForce is the default normal force for the environment
+	NormalForce = 1.0
+	// FCoef is the friction coefficient
+	FCoef = 0.02
+)
+
 // KineticFriction force
 type KineticFriction struct {
 	mover     *vectors.Mover
@@ -10,11 +17,7 @@ type KineticFriction struct {
 
 // CreateKineticFriction creates a kinetic friction force
 func CreateKineticFriction(mover *vectors.Mover) *KineticFriction {
-	// NOTE(Georgi): Currently hardcoded
-	coef := 0.02
-	normalForce := 1.0
-
-	return &KineticFriction{mover, coef * normalForce}
+	return &KineticFriction{mover, FCoef * NormalForce}
 }
 
 // GetForce returns the force vector of kinetic friction
