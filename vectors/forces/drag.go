@@ -2,6 +2,8 @@ package forces
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
+const defaultDragCoef = 0.02
+
 // Drag force
 type Drag struct {
 	mover *vectors.Mover
@@ -9,7 +11,7 @@ type Drag struct {
 }
 
 // CreateDrag creates a drag force
-func CreateDrag(mover *vectors.Mover, coef float64) {
+func CreateDrag(mover *vectors.Mover, coef float64) *Drag {
 	// Fd = -1/2 * ro * v^2 * A * Cd * v(^)
 	// Fd - Drag force vector
 	// ro - density of the environment (air/liquid)
@@ -19,14 +21,27 @@ func CreateDrag(mover *vectors.Mover, coef float64) {
 	// v(^) - velocity unit vector
 	//
 	// Simplified: Fd = -1 * m.velocity.mag() ^ 2 * Cd * m.velocity.norm()
-	return &Drag{mover}
+
+	var dragC float64
+
+	if coef > 0 {
+		dragC = coef
+	} else {
+		dragC = defaultDragCoef
+	}
+
+	return &Drag{mover, dragC}
 }
 
+// GetForce returns the force vector of gravity
 func (d *Drag) GetForce() *vectors.Vector {
-	force := mover.GetVelocity().Copy()
+	force := d.mover.GetVelocity().Copy()
 	speed := force.Magnitude()
-	direction.Normalize()
-	direction.Multiply(-1)
 
-	vUnit = mover.GET
+	force.Normalize()
+	force.Multiply(-1)
+	force.Multiply(d.coef)
+	force.Multiply(speed * speed)
+
+	return force
 }
