@@ -37,11 +37,10 @@ func CreateDrag(mover *vectors.Mover, coef float64) *Drag {
 func (d *Drag) GetForce() *vectors.Vector {
 	force := d.mover.GetVelocity().Copy()
 	speed := force.Magnitude()
+	mag := -1 * speed * speed * d.coef
 
 	force.Normalize()
-	force.Multiply(-1)
-	force.Multiply(d.coef)
-	force.Multiply(speed * speed)
+	force.Multiply(mag)
 
 	return force
 }
