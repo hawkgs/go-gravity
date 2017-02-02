@@ -2,6 +2,9 @@ package vectors
 
 import "github.com/hAWKdv/go-gravity/vectors/utils"
 
+// MoverDefMass keeps the default mass of the Mover
+const MoverDefMass = 1
+
 // Mover describes a basic moveable object/particle
 type Mover struct {
 	Obj           interface{}
@@ -28,7 +31,7 @@ func NewMover(obj interface{}, location *Vector, container *Vector) *Mover {
 
 	mover.acceleration = NewVector(0, 0)
 	mover.velocity = NewVector(0, 0)
-	mover.mass = 1
+	mover.mass = MoverDefMass
 	mover.limit = 0
 	mover.container = container
 

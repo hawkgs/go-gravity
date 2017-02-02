@@ -2,13 +2,15 @@ package particles
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
-// Particle ...
+const particleLifespan = 100
+
+// Particle keeps vectors.Mover and adds a lifespan property
 type Particle struct {
-	vectors.Mover
+	mover    *vectors.Mover
 	lifespan int
 }
 
-// NewParticle ...
-func NewParticle(obj interface{}, location *vectors.Vector, container *vectors.Vector) *Particle {
-	return &Particle{vectors.Mover{Obj: obj}, 100}
+// NewParticle creates an object of type Particle (constructor)
+func NewParticle(mover *vectors.Mover) *Particle {
+	return &Particle{mover, particleLifespan}
 }
