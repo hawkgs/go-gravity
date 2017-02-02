@@ -61,6 +61,10 @@ func (m *Mover) GetVelocity() *Vector {
 
 // ApplyForce adds the force vector the object's acceleration vector
 func (m *Mover) ApplyForce(force *Vector) {
+	if force == nil {
+		return
+	}
+
 	// Newton's 2nd law: Acceleration = Sum of all forces / Mass
 	fCopy := force.Copy()
 	fCopy.Divide(m.mass)
