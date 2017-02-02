@@ -101,16 +101,21 @@ func (m *Mover) BounceOff() {
 		return
 	}
 
+	// Right/left
 	if m.location.X > m.container.X {
-		m.location.X = m.container.X
 		m.velocity.X *= -1
+		m.location.X = m.container.X
 	} else if m.location.X < 0 {
 		m.velocity.X *= -1
 		m.location.X = 0
 	}
 
+	// Bottom/top
 	if m.location.Y > m.container.Y {
 		m.velocity.Y *= -1
 		m.location.Y = m.container.Y
+	} else if m.location.Y < 0 {
+		m.velocity.Y *= -1
+		m.location.Y = 0
 	}
 }
