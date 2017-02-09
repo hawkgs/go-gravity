@@ -16,6 +16,7 @@ var particleCt int
 type Particle struct {
 	mover    *vectors.Mover
 	push     *forces.Push
+	friction *forces.KineticFriction
 	lifespan int
 	id       int
 }
@@ -24,10 +25,13 @@ type Particle struct {
 func NewParticle(mover *vectors.Mover) *Particle {
 	particleCt++
 	pushForce := getRandomPushDirection()
-	return &Particle{mover, pushForce, particleLifespan, particleCt}
+	kinFriction := forces.CreateKineticFriction(mover)
+
+	return &Particle{mover, pushForce, kinFriction, particleLifespan, particleCt}
 }
 
 func getRandomPushDirection() *forces.Push {
 	dir := float64(rand.Intn(359))
+	// todo: change magnitude
 	return forces.CreatePush(dir, 0.5, defaultPushDuration)
 }
