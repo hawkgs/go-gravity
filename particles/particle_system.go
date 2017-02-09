@@ -28,6 +28,18 @@ func NewParticleSystem(objs []interface{}, conf *Conf) *ParticleSystem {
 	return &ParticleSystem{particles, conf}
 }
 
-func (ps *ParticleSystem) UpdateSystem() {
-	// todo
+// UpdateSystem is a genetic method for updating particles in the system
+func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
+	for _, particle := range ps.particles {
+		if ps.conf.continious {
+			update(particle)
+		} else {
+			if particle.lifespan > 0 {
+				update(particle)
+				particle.lifespan--
+			} else {
+				// remove particle
+			}
+		}
+	}
 }
