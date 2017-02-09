@@ -7,10 +7,9 @@ import (
 
 // Conf represents the configuration structure of a particle system
 type Conf struct {
-	continious  bool
-	particleNum int
-	location    *vectors.Vector
-	container   *vectors.Vector
+	continious bool
+	location   *vectors.Vector
+	container  *vectors.Vector
 }
 
 // ParticleSystem describes a set a of particles
@@ -34,13 +33,12 @@ func NewParticleSystem(objs []interface{}, conf *Conf) *ParticleSystem {
 // UpdateSystem is a genetic method for updating particles in the system
 func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 	for _, particle := range ps.particles {
-		if ps.conf.continious {
-			ps.applyForces(particle)
-			update(particle)
-		} else {
+		ps.applyForces(particle)
+		update(particle)
+		particle.mover.BounceOff()
+
+		if !ps.conf.continious {
 			if particle.lifespan > 0 {
-				ps.applyForces(particle)
-				update(particle)
 				particle.lifespan--
 			} else {
 				// remove particle
