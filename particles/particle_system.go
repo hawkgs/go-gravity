@@ -34,6 +34,7 @@ func NewParticleSystem(objs []interface{}, conf *Conf) *ParticleSystem {
 func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 	for _, particle := range ps.particles {
 		ps.applyForces(particle)
+		// todo run in go routine
 		update(particle)
 		particle.mover.BounceOff()
 
@@ -41,7 +42,7 @@ func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 			if particle.lifespan > 0 {
 				particle.lifespan--
 			} else {
-				// remove particle
+				// to do remove particle
 			}
 		}
 	}
