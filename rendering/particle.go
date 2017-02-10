@@ -6,7 +6,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-// RenderParticle runs the main rendering process
+// RenderParticle used for rendering a single particle in SDL2
 func RenderParticle() int {
 	// Create window
 	window, exit := CreateSdlWindow()

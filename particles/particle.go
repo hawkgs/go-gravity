@@ -33,5 +33,5 @@ func NewParticle(mover *vectors.Mover) *Particle {
 func getRandomPushDirection() *forces.Push {
 	dir := float64(rand.Intn(359))
 	// todo: change magnitude
-	return forces.CreatePush(dir, 0.5, defaultPushDuration)
+	return forces.CreatePush(dir, 0.2, defaultPushDuration)
 }

@@ -1,6 +1,8 @@
 package particles
 
 import (
+	"reflect"
+
 	"github.com/hAWKdv/go-gravity/vectors/forces"
 	"github.com/hAWKdv/go-gravity/vectors/vectors"
 )
@@ -19,12 +21,22 @@ type ParticleSystem struct {
 	gravity   *forces.Gravity
 }
 
+// NewConf creates a configuration object for a particle system
+func NewConf(continious bool, location, container *vectors.Vector) *Conf {
+	return &Conf{continious, location, container}
+}
+
 // NewParticleSystem creates an object of type ParticleSystem (constructor)
-func NewParticleSystem(objs []interface{}, conf *Conf) *ParticleSystem {
+func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 	var particles []*Particle
-	for _, obj := range objs {
-		mover := vectors.NewMover(obj, conf.location, conf.container)
-		particles = append(particles, NewParticle(mover))
+
+	if reflect.TypeOf(objs).Kind() == reflect.Slice {
+		s := reflect.ValueOf(objs)
+
+		for i := 0; i < s.Len(); i++ {
+			mover := vectors.NewMover(s.Index(i).Interface(), conf.location, conf.container)
+			particles = append(particles, NewParticle(mover))
+		}
 	}
 
 	return &ParticleSystem{particles, conf, forces.CreateGravity()}
