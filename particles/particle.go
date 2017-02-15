@@ -8,7 +8,7 @@ import (
 )
 
 const particleLifespan = 100
-const defaultPushDuration = 60 // Frames
+const defaultPushDuration = 10 // Frames
 
 var particleCt int
 

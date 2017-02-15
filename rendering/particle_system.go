@@ -23,10 +23,10 @@ func RenderParticleSystem() int {
 	renderer.Clear()
 
 	// Create group of rects
-	rectGroup := []*sdl.Rect{
-		&sdl.Rect{X: 100, Y: 100, W: 10, H: 10},
-		&sdl.Rect{X: 100, Y: 100, W: 10, H: 10},
-		&sdl.Rect{X: 100, Y: 100, W: 10, H: 10}}
+	var rectGroup []*sdl.Rect
+	for i := 0; i < 100; i++ {
+		rectGroup = append(rectGroup, &sdl.Rect{X: 100, Y: 100, W: 10, H: 10})
+	}
 
 	psConf := particles.NewConf(true, vectors.NewVector(100, 100), vectors.NewVector(WindowWidth, WindowHeight))
 	ps := particles.NewParticleSystem(rectGroup, psConf)
