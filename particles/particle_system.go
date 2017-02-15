@@ -19,6 +19,7 @@ type ParticleSystem struct {
 	particles []*Particle
 	conf      *Conf
 	gravity   *forces.Gravity
+	frame     int
 }
 
 // NewConf creates a configuration object for a particle system
@@ -39,7 +40,7 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 		}
 	}
 
-	return &ParticleSystem{particles, conf, forces.CreateGravity()}
+	return &ParticleSystem{particles, conf, forces.CreateGravity(), 0}
 }
 
 // UpdateSystem is a genetic method for updating particles in the system
@@ -66,10 +67,15 @@ func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 		// }(particle)
 	}
 
+	ps.frame++
 	// wg.Wait()
 }
 
 func (ps *ParticleSystem) applyForces(p *Particle) {
+	if ps.frame <= p.retardation {
+		return
+	}
+
 	p.mover.ApplyForce(ps.gravity.GetForce())
 	p.mover.ApplyForce(p.friction.GetForce())
 	p.mover.ApplyForce(p.push.GetForce())

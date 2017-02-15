@@ -8,17 +8,19 @@ import (
 )
 
 const particleLifespan = 100
+const maxFrameRetardation = 20
 const defaultPushDuration = 10 // Frames
 
 var particleCt int
 
 // Particle keeps vectors.Mover and adds a lifespan property
 type Particle struct {
-	mover    *vectors.Mover
-	push     *forces.Push
-	friction *forces.KineticFriction
-	lifespan int
-	id       int
+	mover       *vectors.Mover
+	push        *forces.Push
+	friction    *forces.KineticFriction
+	retardation int
+	lifespan    int
+	id          int
 }
 
 // NewParticle creates an object of type Particle (constructor)
@@ -26,8 +28,9 @@ func NewParticle(mover *vectors.Mover) *Particle {
 	particleCt++
 	pushForce := getRandomPushDirection()
 	kinFriction := forces.CreateKineticFriction(mover)
+	retardation := rand.Intn(maxFrameRetardation)
 
-	return &Particle{mover, pushForce, kinFriction, particleLifespan, particleCt}
+	return &Particle{mover, pushForce, kinFriction, retardation, particleLifespan, particleCt}
 }
 
 func getRandomPushDirection() *forces.Push {
