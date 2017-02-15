@@ -34,7 +34,7 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 		s := reflect.ValueOf(objs)
 
 		for i := 0; i < s.Len(); i++ {
-			mover := vectors.NewMover(s.Index(i).Interface(), conf.location, conf.container)
+			mover := vectors.NewMover(s.Index(i).Interface(), conf.location.Copy(), conf.container)
 			particles = append(particles, NewParticle(mover))
 		}
 	}
