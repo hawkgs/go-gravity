@@ -7,7 +7,6 @@ import (
 	"github.com/hAWKdv/go-gravity/vectors/vectors"
 )
 
-const particleLifespan = 100
 const maxFrameRetardation = 20
 const defaultPushDuration = 15 // Frames
 
@@ -24,13 +23,14 @@ type Particle struct {
 }
 
 // NewParticle creates an object of type Particle (constructor)
-func NewParticle(mover *vectors.Mover) *Particle {
+func NewParticle(mover *vectors.Mover, lifespan int) *Particle {
 	particleCt++
 	pushForce := getRandomPushDirection()
 	kinFriction := forces.CreateKineticFriction(mover)
 	retardation := rand.Intn(maxFrameRetardation)
+	lifespan += retardation
 
-	return &Particle{mover, pushForce, kinFriction, retardation, particleLifespan, particleCt}
+	return &Particle{mover, pushForce, kinFriction, retardation, lifespan, particleCt}
 }
 
 func getRandomPushDirection() *forces.Push {

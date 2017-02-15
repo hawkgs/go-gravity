@@ -10,9 +10,10 @@ import (
 
 // Conf represents the configuration structure of a particle system
 type Conf struct {
-	continious bool
-	location   *vectors.Vector
-	container  *vectors.Vector
+	continious       bool
+	particleLifespan int
+	location         *vectors.Vector
+	container        *vectors.Vector
 }
 
 // ParticleSystem describes a set a of particles
@@ -24,8 +25,8 @@ type ParticleSystem struct {
 }
 
 // NewConf creates a configuration object for a particle system
-func NewConf(continious bool, location, container *vectors.Vector) *Conf {
-	return &Conf{continious, location, container}
+func NewConf(continious bool, pLifespan int, location, container *vectors.Vector) *Conf {
+	return &Conf{continious, pLifespan, location, container}
 }
 
 // NewParticleSystem creates an object of type ParticleSystem (constructor)
@@ -37,7 +38,7 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 
 		for i := 0; i < s.Len(); i++ {
 			mover := vectors.NewMover(s.Index(i).Interface(), conf.location.Copy(), conf.container)
-			particles = append(particles, NewParticle(mover))
+			particles = append(particles, NewParticle(mover, conf.particleLifespan))
 		}
 	}
 
@@ -52,17 +53,12 @@ func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 		wg.Add(1)
 
 		go func(particle *Particle) {
-			ps.applyForces(particle)
-			// todo run in go routine
-			update(particle)
-			particle.mover.BounceOff()
+			if ps.conf.continious || particle.lifespan > 0 {
+				ps.applyForces(particle)
+				update(particle)
+				particle.mover.BounceOff()
 
-			if !ps.conf.continious {
-				if particle.lifespan > 0 {
-					particle.lifespan--
-				} else {
-					// to do remove particle
-				}
+				particle.lifespan--
 			}
 			wg.Done()
 		}(particle)
