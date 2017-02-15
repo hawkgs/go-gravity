@@ -12,6 +12,7 @@ type Mover struct {
 	velocity      *Vector
 	location      *Vector
 	container     *Vector
+	initLoc       *Vector
 	mass          float64
 	limit         float64
 	aAcceleration float64
@@ -34,12 +35,8 @@ func NewMover(obj interface{}, location *Vector, container *Vector) *Mover {
 	mover.mass = MoverDefMass
 	mover.limit = 0
 	mover.container = container
-
-	if location != nil {
-		mover.location = location
-	} else {
-		mover.location = NewVector(0, 0)
-	}
+	mover.location = location
+	mover.initLoc = location.Copy()
 
 	return mover
 }
@@ -118,4 +115,9 @@ func (m *Mover) BounceOff() {
 		m.velocity.Y *= -1
 		m.location.Y = 0
 	}
+}
+
+// ResetLocation sets location vector to its initial value
+func (m *Mover) ResetLocation() {
+	m.location = m.initLoc.Copy()
 }

@@ -33,6 +33,13 @@ func NewParticle(mover *vectors.Mover, lifespan int) *Particle {
 	return &Particle{mover, pushForce, kinFriction, retardation, lifespan, particleCt}
 }
 
+// Reset a particle to its initial state
+func (p *Particle) Reset(lifespan int) {
+	p.lifespan = lifespan
+	p.mover.ResetLocation()
+	p.push = getRandomPushDirection()
+}
+
 func getRandomPushDirection() *forces.Push {
 	dir := float64(rand.Intn(359))
 	// todo: change magnitude
