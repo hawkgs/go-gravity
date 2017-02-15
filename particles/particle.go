@@ -9,7 +9,7 @@ import (
 
 const particleLifespan = 100
 const maxFrameRetardation = 20
-const defaultPushDuration = 10 // Frames
+const defaultPushDuration = 15 // Frames
 
 var particleCt int
 

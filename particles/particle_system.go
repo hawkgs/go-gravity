@@ -2,6 +2,7 @@ package particles
 
 import (
 	"reflect"
+	"sync"
 
 	"github.com/hAWKdv/go-gravity/vectors/forces"
 	"github.com/hAWKdv/go-gravity/vectors/vectors"
@@ -45,30 +46,30 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 
 // UpdateSystem is a genetic method for updating particles in the system
 func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
-	// wg := sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 
 	for _, particle := range ps.particles {
-		// wg.Add(1)
+		wg.Add(1)
 
-		// go func(particle *Particle) {
-		ps.applyForces(particle)
-		// todo run in go routine
-		update(particle)
-		particle.mover.BounceOff()
+		go func(particle *Particle) {
+			ps.applyForces(particle)
+			// todo run in go routine
+			update(particle)
+			particle.mover.BounceOff()
 
-		if !ps.conf.continious {
-			if particle.lifespan > 0 {
-				particle.lifespan--
-			} else {
-				// to do remove particle
+			if !ps.conf.continious {
+				if particle.lifespan > 0 {
+					particle.lifespan--
+				} else {
+					// to do remove particle
+				}
 			}
-		}
-		// wg.Done()
-		// }(particle)
+			wg.Done()
+		}(particle)
 	}
 
 	ps.frame++
-	// wg.Wait()
+	wg.Wait()
 }
 
 func (ps *ParticleSystem) applyForces(p *Particle) {
