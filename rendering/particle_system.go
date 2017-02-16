@@ -28,7 +28,7 @@ func RenderParticleSystem() int {
 		rectGroup = append(rectGroup, &sdl.Rect{X: 100, Y: 100, W: 10, H: 10})
 	}
 
-	psConf := particles.NewConf(false, 100, vectors.NewVector(100, 100), vectors.NewVector(WindowWidth, WindowHeight))
+	psConf := particles.NewConf(false, 100, 100, vectors.NewVector(100, 100), vectors.NewVector(WindowWidth, WindowHeight))
 	ps := particles.NewParticleSystem(rectGroup, psConf)
 
 	running := true
