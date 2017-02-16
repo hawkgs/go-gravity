@@ -35,7 +35,7 @@ func NewParticle(mover *vectors.Mover, lifespan int, maxRetardation int) *Partic
 // Reset a particle to its initial state
 func (p *Particle) Reset(lifespan int) {
 	p.lifespan = lifespan
-	p.mover.ResetLocation()
+	p.mover.Reset()
 	p.push = getRandomPushDirection()
 }
 

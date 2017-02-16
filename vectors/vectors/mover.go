@@ -117,7 +117,8 @@ func (m *Mover) BounceOff() {
 	}
 }
 
-// ResetLocation sets location vector to its initial value
-func (m *Mover) ResetLocation() {
+// Reset sets vector state to its initial value
+func (m *Mover) Reset() {
+	m.velocity = NewVector(0, 0)
 	m.location = m.initLoc.Copy()
 }
