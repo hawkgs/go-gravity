@@ -83,3 +83,89 @@ func TestPixelLoc(t *testing.T) {
 		t.Error("Expected X and Y, to be 2 and 6, got", x, y)
 	}
 }
+
+// Graphical representation
+// ______
+// ../\..
+func TestBounceOffTop(t *testing.T) {
+	location := NewVector(5, 0)
+	cont := NewVector(10, 10)
+	force := NewVector(1, -1)
+	mover := NewMover(nil, location, cont)
+
+	mover.ApplyForce(force)
+	mover.Update()
+	mover.BounceOff()
+
+	if mover.location.X != 6 || mover.location.Y != 0 {
+		t.Error("Expected location to be {6, 0}, got", mover.location)
+	}
+
+	if mover.velocity.X != 1 || mover.velocity.Y != 1 {
+		t.Error("Expected velocity to be {1, 1}, got", mover.velocity)
+	}
+}
+
+// Graphical representation
+// ..\/..
+// ¯¯¯¯¯¯
+func TestBounceOffBottom(t *testing.T) {
+	location := NewVector(5, 10)
+	cont := NewVector(10, 10)
+	force := NewVector(1, 1)
+	mover := NewMover(nil, location, cont)
+
+	mover.ApplyForce(force)
+	mover.Update()
+	mover.BounceOff()
+
+	if mover.location.X != 6 || mover.location.Y != 10 {
+		t.Error("Expected location to be {6, 10}, got", mover.location)
+	}
+
+	if mover.velocity.X != 1 || mover.velocity.Y != -1 {
+		t.Error("Expected velocity to be {1, -1}, got", mover.velocity)
+	}
+}
+
+// Graphical representation
+// |<
+func TestBounceOffLeft(t *testing.T) {
+	location := NewVector(0, 5)
+	cont := NewVector(10, 10)
+	force := NewVector(-1, 1)
+	mover := NewMover(nil, location, cont)
+
+	mover.ApplyForce(force)
+	mover.Update()
+	mover.BounceOff()
+
+	if mover.location.X != 0 || mover.location.Y != 6 {
+		t.Error("Expected location to be {0, 6}, got", mover.location)
+	}
+
+	if mover.velocity.X != 1 || mover.velocity.Y != 1 {
+		t.Error("Expected velocity to be {1, 1}, got", mover.velocity)
+	}
+}
+
+// Graphical representation
+// >|
+func TestBounceOffRight(t *testing.T) {
+	location := NewVector(10, 5)
+	cont := NewVector(10, 10)
+	force := NewVector(1, 1)
+	mover := NewMover(nil, location, cont)
+
+	mover.ApplyForce(force)
+	mover.Update()
+	mover.BounceOff()
+
+	if mover.location.X != 10 || mover.location.Y != 6 {
+		t.Error("Expected location to be {10, 6}, got", mover.location)
+	}
+
+	if mover.velocity.X != -1 || mover.velocity.Y != 1 {
+		t.Error("Expected velocity to be {-1, 1}, got", mover.velocity)
+	}
+}
