@@ -24,9 +24,13 @@ func RenderParticle() int {
 	renderer.Clear()
 
 	// Create rect
-	rect := sdl.Rect{X: 100, Y: 100, W: 10, H: 10}
+	rect := &sdl.Rect{X: 100, Y: 100, W: 10, H: 10}
+
+	// text, err := renderer.CreateTexture(sdl.PIXELFORMAT_RGBA8888, sdl.TEXTUREACCESS_STATIC, 10, 10)
+	// particle := sdl.Renderer.CopyEx(&text, &sdl.Rect{X: 0, Y: 0, W: 100, H: 100}, &sdl.Rect{X: 0, Y: 0, W: 100, H: 100}, 0, &sdl.Point{X: 5, Y: 5}, nil)
+
 	mover := vectors.NewMover(
-		&rect,
+		rect,
 		vectors.NewVector(float64(rect.X), float64(rect.Y)),
 		vectors.NewVector(WindowWidth, WindowHeight))
 	// mover.SetLimit(0.2)
@@ -56,11 +60,13 @@ func RenderParticle() int {
 		// mover.ApplyForce(wind.GetForce())
 		mover.ApplyForce(friction.GetForce())
 		mover.ApplyForce(push.GetForce())
+
 		mover.UpdateSdl2()
 		mover.BounceOff()
 
+		// Draw rect
 		renderer.SetDrawColor(0, 0, 0, 255)
-		renderer.DrawRect(&rect)
+		renderer.DrawRect(rect)
 
 		renderer.Present()
 		sdl.Delay(1000 / FrameRate)
