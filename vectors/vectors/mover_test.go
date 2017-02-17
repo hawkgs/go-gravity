@@ -169,3 +169,21 @@ func TestBounceOffRight(t *testing.T) {
 		t.Error("Expected velocity to be {-1, 1}, got", mover.velocity)
 	}
 }
+
+func TestReset(t *testing.T) {
+	location := NewVector(5, 5)
+	force := NewVector(3, 3)
+	mover := NewMover(nil, location, location)
+
+	mover.ApplyForce(force)
+	mover.Update()
+	mover.Reset()
+
+	if mover.location.X != 5 || mover.location.Y != 5 {
+		t.Error("Expected location to be {5, 5}, got", mover.location)
+	}
+
+	if mover.velocity.X != 0 || mover.velocity.Y != 0 {
+		t.Error("Expected location to be {0, 0}, got", mover.velocity)
+	}
+}
