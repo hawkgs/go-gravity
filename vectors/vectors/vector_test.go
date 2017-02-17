@@ -2,6 +2,14 @@ package vectors
 
 import "testing"
 
+func TestNewVector(t *testing.T) {
+	v := NewVector(1, 2)
+
+	if v.X != 1 || v.Y != 2 {
+		t.Error("Expected X = 4 and Y = 2, got", v)
+	}
+}
+
 func TestAddition(t *testing.T) {
 	u := NewVector(1, 2)
 	v := NewVector(3, 4)

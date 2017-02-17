@@ -2,6 +2,21 @@ package vectors
 
 import "testing"
 
+func TestNewMover(t *testing.T) {
+	vector := NewVector(1, 1)
+	m := NewMover("a", vector, vector)
+
+	if m.Obj != "a" ||
+		m.acceleration.X != 0 || m.acceleration.Y != 0 ||
+		m.velocity.X != 0 || m.velocity.Y != 0 ||
+		m.location.X != 1 || m.location.Y != 1 ||
+		m.container.X != 1 || m.container.Y != 1 ||
+		m.initLoc.X != 1 || m.initLoc.Y != 1 ||
+		m.mass != 1 || m.limit != 0 {
+		t.Error("Incorrect Mover configuration", m)
+	}
+}
+
 func TestSetMass(t *testing.T) {
 	vector := NewVector(0, 0)
 	mover := NewMover(nil, vector, vector)
