@@ -4,6 +4,8 @@ import (
 	"reflect"
 	"sync"
 
+	"errors"
+
 	"github.com/hAWKdv/go-gravity/vectors/forces"
 	"github.com/hAWKdv/go-gravity/vectors/vectors"
 )
@@ -44,6 +46,19 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 	}
 
 	return &ParticleSystem{particles, conf, forces.CreateGravity(), 0}
+}
+
+// SetMasses adds mass to every particle in the system
+func (ps *ParticleSystem) SetMasses(masses []float64) error {
+	if len(masses) != len(ps.particles) {
+		return errors.New("The length of the masses array differs from particles one.")
+	}
+
+	for i, particle := range ps.particles {
+		particle.mover.SetMass(masses[i])
+	}
+
+	return nil
 }
 
 // UpdateSystem is a genetic method for updating particles in the system

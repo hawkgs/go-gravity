@@ -1,6 +1,8 @@
 package rendering
 
 import (
+	"math/rand"
+
 	"github.com/hAWKdv/go-gravity/particles"
 	"github.com/hAWKdv/go-gravity/vectors/vectors"
 	"github.com/veandco/go-sdl2/sdl"
@@ -22,15 +24,25 @@ func RenderParticleSystem() int {
 	defer renderer.Destroy()
 	renderer.Clear()
 
+	// Create masses
+	var masses []float64
+	for i := 0; i < 100; i++ {
+		m := rand.Float64() + 1.0
+		masses = append(masses, m)
+	}
+
 	// Create group of rects
 	var rectGroup []*sdl.Rect
 	for i := 0; i < 100; i++ {
-		rectGroup = append(rectGroup, &sdl.Rect{X: 100, Y: 100, W: 10, H: 10})
+		m := int32(masses[i]*10) - 5
+		rectGroup = append(rectGroup, &sdl.Rect{X: 100, Y: 100, W: m, H: m})
+		// rectGroup = append(rectGroup, &sdl.Rect{X: 100, Y: 100, W: 10, H: 10})
 	}
 
-	psConf := particles.NewConf(true, 100, 50, vectors.NewVector(100, 100), vectors.NewVector(WindowWidth, WindowHeight))
+	psConf := particles.NewConf(false, 100, 15, vectors.NewVector(100, 100), vectors.NewVector(WindowWidth, WindowHeight))
 
 	ps := particles.NewParticleSystem(rectGroup, psConf)
+	ps.SetMasses(masses)
 
 	running := true
 	for running {
