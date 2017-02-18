@@ -48,3 +48,16 @@ func TestNewParticleSystem(t *testing.T) {
 		t.Error("Expected gravity values to match", gravity, ", got", psGravity)
 	}
 }
+
+func TestIncorrectSetMassesInput(t *testing.T) {
+	strings := []string{"a", "b"}
+	vector := vectors.NewVector(0, 0)
+	conf := NewConf(true, 1, 1, vector, vector)
+
+	ps := NewParticleSystem(strings, conf)
+	err := ps.SetMasses([]float64{2, 3, 4, 5})
+
+	if err == nil {
+		t.Error("Expected an error from input slice")
+	}
+}
