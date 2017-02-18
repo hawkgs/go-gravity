@@ -54,13 +54,13 @@ func (ps *ParticleSystem) UpdateSystem(update func(p *Particle)) {
 		wg.Add(1)
 
 		go func(particle *Particle) {
-			if ps.conf.continious || particle.lifespan > 0 {
+			if !ps.conf.continious || particle.lifespan > 0 {
 				ps.applyForces(particle)
 				update(particle)
 				particle.mover.BounceOff()
 
 				particle.lifespan--
-			} else if !ps.conf.continious && particle.lifespan == 0 {
+			} else if ps.conf.continious && particle.lifespan == 0 {
 				particle.Reset(ps.conf.particleLifespan)
 			}
 			wg.Done()
