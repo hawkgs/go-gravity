@@ -89,5 +89,4 @@ for running {
     renderer.Present()
     sdl.Delay(1000 / FrameRate)
 }
-
 ```

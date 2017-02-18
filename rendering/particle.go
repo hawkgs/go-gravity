@@ -25,10 +25,6 @@ func RenderParticle() int {
 
 	// Create rect
 	rect := &sdl.Rect{X: 100, Y: 100, W: 10, H: 10}
-
-	// text, err := renderer.CreateTexture(sdl.PIXELFORMAT_RGBA8888, sdl.TEXTUREACCESS_STATIC, 10, 10)
-	// particle := sdl.Renderer.CopyEx(&text, &sdl.Rect{X: 0, Y: 0, W: 100, H: 100}, &sdl.Rect{X: 0, Y: 0, W: 100, H: 100}, 0, &sdl.Point{X: 5, Y: 5}, nil)
-
 	mover := vectors.NewMover(
 		rect,
 		vectors.NewVector(float64(rect.X), float64(rect.Y)),

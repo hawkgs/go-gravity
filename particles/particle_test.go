@@ -23,5 +23,23 @@ func TestNewParticle(t *testing.T) {
 		particle.id == 0 {
 		t.Error("Incorrect particle", particle)
 	}
+}
 
+func TestParticleReset(t *testing.T) {
+	vector := vectors.NewVector(0, 0)
+	mover := vectors.NewMover(nil, vector, vector)
+
+	particle := NewParticle(mover, 100, 100)
+	particle.mover.ApplyForce(vectors.NewVector(1, 2))
+	particle.mover.Update()
+
+	particle.Reset(20)
+
+	if particle.lifespan != 20 {
+		t.Error("Expected lifespan to be 20, got", 20)
+	}
+
+	if particle.mover.GetVelocity().X != 0 || particle.mover.GetVelocity().Y != 0 {
+		t.Error("Expected mover's velocity to be {0 0}, got", particle.mover)
+	}
 }
