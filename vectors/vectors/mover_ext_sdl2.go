@@ -13,6 +13,5 @@ func (m *Mover) UpdateSdl2() {
 		x, y := m.PixelLoc()
 		rect.X = int32(x)
 		rect.Y = int32(y)
-		break
 	}
 }

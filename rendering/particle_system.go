@@ -62,7 +62,6 @@ func RenderParticleSystem() int {
 			switch obj.(type) {
 			case *sdl.Rect:
 				renderer.DrawRect(obj.(*sdl.Rect))
-				break
 			}
 		})
 
