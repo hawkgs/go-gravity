@@ -1,6 +1,11 @@
 package forces
 
-import "github.com/hAWKdv/go-gravity/vectors/vectors"
+import (
+	"math"
+
+	"github.com/hAWKdv/go-gravity/vectors/utils"
+	"github.com/hAWKdv/go-gravity/vectors/vectors"
+)
 
 // Wind force
 type Wind struct {
@@ -8,9 +13,11 @@ type Wind struct {
 }
 
 // CreateWind creates a wind force
-func CreateWind() *Wind {
-	// todo values
-	return &Wind{Force{vectors.NewVector(0.01, 0)}}
+func CreateWind(direction, magnitude float64) *Wind {
+	rad := utils.DegToRad(direction)
+	vector := vectors.NewVector(magnitude*math.Cos(rad), magnitude*math.Sin(rad))
+
+	return &Wind{Force{vector}}
 }
 
 // GetForce returns the force vector of gravity

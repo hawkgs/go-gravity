@@ -33,8 +33,8 @@ func RenderParticle() int {
 
 	// Create some forces
 	gravity := forces.CreateGravity()
-	// wind := forces.CreateWind()
-	push := forces.CreatePush(315, 0.2, 30)
+	wind := forces.CreateWind(0, 0.02)
+	// push := forces.CreatePush(315, 0.2, 30)
 	friction := forces.CreateKineticFriction(mover)
 
 	// Main loop
@@ -53,9 +53,9 @@ func RenderParticle() int {
 
 		// Update
 		mover.ApplyForce(gravity.GetForce())
-		// mover.ApplyForce(wind.GetForce())
+		mover.ApplyForce(wind.GetForce())
 		mover.ApplyForce(friction.GetForce())
-		mover.ApplyForce(push.GetForce())
+		// mover.ApplyForce(push.GetForce())
 
 		mover.UpdateSdl2()
 		mover.BounceOff()
