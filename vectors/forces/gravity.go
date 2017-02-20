@@ -2,6 +2,8 @@ package forces
 
 import "github.com/hAWKdv/go-gravity/vectors/vectors"
 
+const gravitationalPull = 0.08
+
 // Gravity force
 type Gravity struct {
 	Force
@@ -9,8 +11,7 @@ type Gravity struct {
 
 // CreateGravity creates a gravity force
 func CreateGravity() *Gravity {
-	// todo values
-	return &Gravity{Force{vector: vectors.NewVector(0, 0.08)}}
+	return &Gravity{Force{vector: vectors.NewVector(0, gravitationalPull)}}
 }
 
 // GetForce returns the force vector of gravity
