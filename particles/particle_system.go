@@ -15,6 +15,8 @@ type Conf struct {
 	continious       bool
 	particleLifespan int
 	maxRetardation   int
+	pushDuration     int
+	pushMagnitude    float64
 	location         *vectors.Vector
 	container        *vectors.Vector
 }
@@ -28,8 +30,12 @@ type ParticleSystem struct {
 }
 
 // NewConf creates a configuration object for a particle system
-func NewConf(continious bool, pLifespan int, maxRetard int, location, container *vectors.Vector) *Conf {
-	return &Conf{continious, pLifespan, maxRetard, location, container}
+func NewConf(
+	continious bool,
+	pLifespan, maxRetard, pushDurr int,
+	pushMag float64,
+	location, container *vectors.Vector) *Conf {
+	return &Conf{continious, pLifespan, maxRetard, pushDurr, pushMag, location, container}
 }
 
 // NewParticleSystem creates an object of type ParticleSystem (constructor)
@@ -41,7 +47,7 @@ func NewParticleSystem(objs interface{}, conf *Conf) *ParticleSystem {
 
 		for i := 0; i < s.Len(); i++ {
 			mover := vectors.NewMover(s.Index(i).Interface(), conf.location.Copy(), conf.container)
-			particles = append(particles, NewParticle(mover, conf.particleLifespan, conf.maxRetardation))
+			particles = append(particles, NewParticle(mover, conf))
 		}
 	}
 

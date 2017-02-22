@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	os.Exit(rendering.RenderParticle())
+	os.Exit(rendering.RenderParticleSystem())
 }
