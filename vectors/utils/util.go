@@ -2,11 +2,6 @@ package utils
 
 import "math"
 
-// Distance calculates the Eucleadean distance between two vectors
-// func Distance(u *vector.Vector, v *vector.Vector) float64 {
-// 	return math.Sqrt(math.Pow(u.x-v.x, 2) + math.Pow(u.y-v.y, 2))
-// }
-
 // RadToDeg converts radians to degrees
 func RadToDeg(rad float64) float64 {
 	return rad * 180 / math.Pi

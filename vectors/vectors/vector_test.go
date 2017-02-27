@@ -1,6 +1,7 @@
 package vectors
 
 import "testing"
+import "math"
 
 func TestNewVector(t *testing.T) {
 	v := NewVector(1, 2)
@@ -112,5 +113,17 @@ func TestLimitWithLowerMag(t *testing.T) {
 
 	if v.X != 3 || v.Y != 4 {
 		t.Error("Expected X = 3 and Y = 4, got", v)
+	}
+}
+
+func TestDistance(t *testing.T) {
+	u := NewVector(1, 1)
+	v := NewVector(4, 4)
+
+	distance := u.Distance(v)
+	expected := 3 * math.Sqrt(2)
+
+	if math.Abs(distance-expected) > 0.000000000000001 {
+		t.Error("Expected distance = ", expected, ", got", distance)
 	}
 }
