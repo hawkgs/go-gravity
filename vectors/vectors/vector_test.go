@@ -137,9 +137,53 @@ func TestHeading(t *testing.T) {
 			heading := test.input.Heading()
 
 			if heading != test.result {
-				t.Error("Expected heading to be", test.result, "got,", heading)
+				t.Error("Expected heading to be", test.result, ", got", heading)
 			}
 		})
+	}
+}
+
+func TestRotate(t *testing.T) {
+	vector := NewVector(1, 0)
+	tests := []struct {
+		rotate float64
+		expect *Vector
+	}{
+		{rotate: 0, expect: NewVector(1, 0)},
+		{rotate: 45, expect: NewVector(1, 1)},
+		{rotate: 90, expect: NewVector(0, 1)},
+		{rotate: 135, expect: NewVector(-1, 1)},
+		{rotate: 180, expect: NewVector(-1, 0)},
+		{rotate: 225, expect: NewVector(-1, -1)},
+		{rotate: 270, expect: NewVector(0, -1)},
+		{rotate: 315, expect: NewVector(1, -1)},
+	}
+
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("Rotate with %v", test.rotate), func(t *testing.T) {
+			v := vector.Copy()
+			v.Rotate(test.rotate)
+
+			if v.X != test.expect.X || v.Y != test.expect.Y {
+				t.Error("Expected vector to be", test.expect, ", got", v)
+			}
+		})
+	}
+}
+
+func TestNormalize(t *testing.T) {
+	vector := NewVector(5, 5)
+	vector.Normalize()
+	mag := vector.Magnitude()
+
+	if !(0.9999999999999 < mag && mag <= 1) {
+		t.Error("Expected magnitude to be 1, got", mag)
+	}
+
+	side := 1 / math.Sqrt(2)
+
+	if vector.X != side || vector.Y != side {
+		t.Error("Expected X = Y =", side, ", got", vector)
 	}
 }
 
@@ -151,6 +195,19 @@ func TestDistance(t *testing.T) {
 	expected := 3 * math.Sqrt(2)
 
 	if math.Abs(distance-expected) > 0.000000000000001 {
-		t.Error("Expected distance = ", expected, ", got", distance)
+		t.Error("Expected distance to be", expected, ", got", distance)
+	}
+}
+
+func TestCopy(t *testing.T) {
+	u := NewVector(1, 2)
+	v := u.Copy()
+
+	if u.X != v.X || u.Y != v.Y {
+		t.Error("Expected X = 1 and Y = 2, got", v)
+	}
+
+	if u == v {
+		t.Error("Expected U and V to have different addresses, got", &u, "and", &v)
 	}
 }

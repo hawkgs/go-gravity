@@ -97,7 +97,7 @@ func (v *Vector) Normalize() {
 	}
 }
 
-// Distance calculates the Eucleadean distance between two vectors
+// Distance calculates the Eucleadean distance between the two vectors
 func (v *Vector) Distance(u *Vector) float64 {
 	return math.Sqrt(math.Pow(u.X-v.X, 2) + math.Pow(u.Y-v.Y, 2))
 }
