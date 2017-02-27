@@ -2,6 +2,7 @@ package vectors
 
 import "testing"
 import "math"
+import "fmt"
 
 func TestNewVector(t *testing.T) {
 	v := NewVector(1, 2)
@@ -113,6 +114,32 @@ func TestLimitWithLowerMag(t *testing.T) {
 
 	if v.X != 3 || v.Y != 4 {
 		t.Error("Expected X = 3 and Y = 4, got", v)
+	}
+}
+
+func TestHeading(t *testing.T) {
+	tests := []struct {
+		input  *Vector
+		result float64
+	}{
+		{input: NewVector(1, 0), result: 0},
+		{input: NewVector(1, 1), result: 45},
+		{input: NewVector(0, 1), result: 90},
+		{input: NewVector(-1, 1), result: 135},
+		{input: NewVector(-1, 0), result: 180},
+		{input: NewVector(-1, -1), result: 225},
+		{input: NewVector(0, -1), result: 270},
+		{input: NewVector(1, -1), result: 315},
+	}
+
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("Heading %v", test.result), func(t *testing.T) {
+			heading := test.input.Heading()
+
+			if heading != test.result {
+				t.Error("Expected heading to be", test.result, "got,", heading)
+			}
+		})
 	}
 }
 

@@ -67,10 +67,15 @@ func (v *Vector) Limit(mag float64) {
 }
 
 // Heading returns the heading of the vector in degrees
-func (v *Vector) Heading() float64 {
-	angle := math.Atan2(v.Y, v.X)
+func (v *Vector) Heading() (angle float64) {
+	angle = math.Atan2(v.Y, v.X)
+	angle = utils.RadToDeg(angle)
 
-	return utils.RadToDeg(angle)
+	if angle < 0 {
+		angle += 360
+	}
+
+	return
 }
 
 // Rotate vector by a degree angle
