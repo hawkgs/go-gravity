@@ -6,8 +6,8 @@ import (
 
 	"errors"
 
-	"github.com/hAWKdv/go-gravity/vectors/forces"
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/vectors/forces"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 )
 
 // Conf represents the configuration structure of a particle system

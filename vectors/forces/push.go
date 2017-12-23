@@ -3,8 +3,8 @@ package forces
 import (
 	"math"
 
-	"github.com/hAWKdv/go-gravity/vectors/utils"
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/vectors/utils"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 )
 
 // Push force

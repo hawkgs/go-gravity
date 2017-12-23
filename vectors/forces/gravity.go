@@ -1,6 +1,6 @@
 package forces
 
-import "github.com/hAWKdv/go-gravity/vectors/vectors"
+import "github.com/hawkgs/go-gravity/vectors/vectors"
 
 const gravitationalPull = 0.08
 

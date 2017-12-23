@@ -3,7 +3,7 @@ package vectors
 import (
 	"math"
 
-	"github.com/hAWKdv/go-gravity/vectors/utils"
+	"github.com/hawkgs/go-gravity/vectors/utils"
 )
 
 // GVector represents a geometric/Eucleadean vector

@@ -1,6 +1,6 @@
 package vectors
 
-import "github.com/hAWKdv/go-gravity/vectors/utils"
+import "github.com/hawkgs/go-gravity/vectors/utils"
 
 // MoverDefMass keeps the default mass of the Mover
 const MoverDefMass = 1

@@ -1,8 +1,8 @@
 package rendering
 
 import (
-	"github.com/hAWKdv/go-gravity/vectors/forces"
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/vectors/forces"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 	"github.com/veandco/go-sdl2/sdl"
 )
 

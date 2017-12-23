@@ -3,7 +3,7 @@ package particles
 import (
 	"testing"
 
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 )
 
 func TestNewParticle(t *testing.T) {

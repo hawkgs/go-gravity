@@ -1,6 +1,6 @@
 package forces
 
-import "github.com/hAWKdv/go-gravity/vectors/vectors"
+import "github.com/hawkgs/go-gravity/vectors/vectors"
 
 // VForce represents the methods of a vector force
 type VForce interface {

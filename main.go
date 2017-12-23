@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/hAWKdv/go-gravity/rendering"
+	"github.com/hawkgs/go-gravity/rendering"
 )
 
 func main() {

@@ -3,8 +3,8 @@ package particles
 import (
 	"math/rand"
 
-	"github.com/hAWKdv/go-gravity/vectors/forces"
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/vectors/forces"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 )
 
 const (

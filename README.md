@@ -1,7 +1,7 @@
 # go-gravity
 Small Golang library for simulating 2D particles with the help of SDL2.
 
-![GoGravity](https://raw.githubusercontent.com/hAWKdv/go-gravity/master/logo.png)
+![GoGravity](https://raw.githubusercontent.com/hawkgs/go-gravity/master/logo.png)
 
 ## Setup
 In order to run/try the code in `rendering` package, you must install SDL2 along with the [Golang bindings](https://github.com/veandco/go-sdl2). Of course, you are free to choose whatever rendering method you want since the core of the library is decoupled from SDL2.

@@ -3,8 +3,8 @@ package rendering
 import (
 	"math/rand"
 
-	"github.com/hAWKdv/go-gravity/particles"
-	"github.com/hAWKdv/go-gravity/vectors/vectors"
+	"github.com/hawkgs/go-gravity/particles"
+	"github.com/hawkgs/go-gravity/vectors/vectors"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
